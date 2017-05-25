@@ -1,0 +1,11 @@
+<div *ngFor="let q of questions" id={{q.Id}}>
+  <p>{{q.QuestionText}}</p>
+  <label *ngFor="let a of answers | answersForQuestion:q.Id" >
+    <input type="radio" name="question-{{q.Id}}" value="answer-{{a.Id}}" id="answer-{{a.Id}}" (click)="selected(a)" />
+    {{a.AnswerText}}
+    <!--<span *ngFor="let p of a.Products">{{p}}, </span>-->
+  </label>   
+</div>
+
+
+  <app-results class="app-results" [selectedProducts]="getSelectedProducts()" [allAnswers]="this.answers"></app-results>

@@ -1,0 +1,15 @@
+label {
+    display: block;
+    text-transform: capitalize;
+}
+
+.app-results {
+    float: left;
+    margin-top: -1350px;
+    margin-left: 800px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 4px;
+}
