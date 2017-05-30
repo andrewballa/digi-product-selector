@@ -5,11 +5,23 @@ label {
 
 .app-results {
     float: left;
-    margin-top: -1350px;
+    margin-top: -350px;
     margin-left: 800px;
+}
+
+.app-results > .header{
+    margin:20px 0;
 }
 
 input[type="checkbox"] {
     transform: scale(1.5);
     margin: 4px;
+}
+
+.model-results{
+    margin-bottom:20px;
+}
+
+.model-results > .header{
+    margin-bottom:10px;
 }

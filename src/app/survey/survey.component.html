@@ -1,11 +1,23 @@
-<div *ngFor="let q of questions" id={{q.Id}}>
-  <p>{{q.QuestionText}}</p>
-  <label *ngFor="let a of answers | answersForQuestion:q.Id" >
-    <input type="radio" name="question-{{q.Id}}" value="answer-{{a.Id}}" id="answer-{{a.Id}}" (click)="selected(a)" />
-    {{a.AnswerText}}
+<p  *ngIf="isAnswersAvailable==false && isQuestionsAvailable==false">Loading Questions...</p>
+
+<div class="survey"  *ngIf="isAnswersAvailable==true && isQuestionsAvailable==true">
+  <div class="questions-container">
+    <div class="question" *ngFor="let q of questions.slice(this.currentQuestion,this.currentQuestion+2)" id=question-{{q.Id}}>
+      <p>{{q.QuestionOrder}}) {{q.QuestionText}}</p>
+      <label *ngFor="let a of answers | answersForQuestion:q.Id">
+        <input type="radio" name="radio-for-question-{{q.Id}}" value="answer-{{a.Id}}" [checked]="isSelected(q.Id,a.Id)" (click)="answerSelected(a)" />
+        {{a.AnswerText}}
     <!--<span *ngFor="let p of a.Products">{{p}}, </span>-->
-  </label>   
+      </label>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button [disabled]="this.currentQuestion <= 0" (click)="showPrev()" onclick="return false;"><Prev</button>
+    <button [disabled]="this.currentQuestion > this.numberOfViews + 2" (click)="showNext()" onclick="return false;">Next></button>
+    <button (click)="startOverSurvey()" onclick="return false;">Start Over</button>
+  </div>
 </div>
 
 
-  <app-results class="app-results" [selectedProducts]="getSelectedProducts()" [allAnswers]="this.answers"></app-results>
+<app-results class="app-results" [isResetResults]="isResetResults" [selectedProducts]="getSelectedProducts()" [allAnswers]="this.answers"></app-results>

@@ -8,15 +8,13 @@ import { SurveyComponent } from './survey/survey.component';
 import { SelectorApiService } from './selector-api.service';
 import { AnswersForQuestionPipe } from './pipes/answers-for-question.pipe';
 import { ResultsComponent } from './results/results.component';
-import { GetObjKeysPipe } from './pipes/get-obj-keys.pipe'
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
     AnswersForQuestionPipe,
-    ResultsComponent,
-    GetObjKeysPipe
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

@@ -13,10 +13,12 @@ import * as _ from "lodash";
 export class ResultsComponent implements OnInit, DoCheck {
 
   allProducts: Product[];
-  selectedProdSorted: Product[];
+  selectedProdSorted: Product[]=[];
 
   @Input() selectedProducts: SelectedProducts[] = [];
   @Input() allAnswers: Answer[] = [];
+  @Input() isResetResults: boolean;
+
 
   constructor(private selectorApi: SelectorApiService) { }
 
@@ -28,6 +30,10 @@ export class ResultsComponent implements OnInit, DoCheck {
     if (this.selectedProducts != null) {
       this.processSelectedProducts();
     }
+
+    if (this.isResetResults == true) {
+      this.selectedProdSorted = [];
+    }
   }
 
 
@@ -36,46 +42,47 @@ export class ResultsComponent implements OnInit, DoCheck {
   }
 
   processSelectedProducts(): void {
+    if (!this.isResetResults) {
+      var that = this;
 
-    var that = this;
-
-    //Get all selected product Id's into an array
-    var selectedProdIds = []; //clear the array
-    this.selectedProducts.forEach(function (sp, i) {
-      sp.Products.forEach(function (pId) {
-        selectedProdIds.push(pId);
-      })
-    })
-
-    //use lodash's _.countBy function to create an object which contains key/value pairs of product and 
-    //the number of times the product appears in the array
-    var selectedProdCounts = _.countBy(selectedProdIds);
-
-    // Create an array of selected products
-    this.selectedProdSorted = Object.keys(selectedProdCounts).map(function (key) {
-      var thisProd = that.allProducts.find(x => x.Id.toString() == key);
-      var prod = new Product();
-      prod.Id = +key;
-      prod.ModelSku = thisProd.ModelSku;
-      prod["Count"] = selectedProdCounts[key];
-      that.selectedProducts.forEach(function (sp) {
+      //Get all selected product Id's into an array
+      var selectedProdIds: number[] = []; //clear the array
+      this.selectedProducts.forEach(function (sp, i) {
         sp.Products.forEach(function (pId) {
-          if (pId == prod.Id) {
-            prod["Answers"].push(sp.AnswerId);
-          }
+          selectedProdIds.push(pId);
         })
       })
-      return prod;
-    });
 
-    this.selectedProdSorted = _.sortBy(this.selectedProdSorted, x => x["Count"]).reverse();
+      // var test = this.selectedProducts.map(function(sp){return sp.Products}).map(function(p){return p})
+      // var selectedProdCounts2 = _.countBy(test);
+      // console.log(test);
 
+      //use lodash's _.countBy function to create an object which contains key/value pairs of product and 
+      //the number of times the product appears in the array
+      var selectedProdCounts = _.countBy(selectedProdIds);
+
+      // Create an array of selected products
+      this.selectedProdSorted = Object.keys(selectedProdCounts).map(function (key) {
+        var thisProd = that.allProducts.find(p => p.Id.toString() == key);
+        var prod = new Product();
+        prod.Id = +key; //+ is TypeScript syntax to convert a string to an integer
+        prod.ModelSku = thisProd.ModelSku;
+        that.selectedProducts.forEach(function (sp) {
+          sp.Products.forEach(function (pId) {
+            if (pId == prod.Id) {
+              prod["Answers"].push(sp.AnswerId);
+            }
+          })
+        })
+        return prod;
+      });
+
+      this.selectedProdSorted = _.sortBy(this.selectedProdSorted, p => p["Answers"].length).reverse();
+    }
   }
 
-  answerChecked(answers:number[],answerId:number):boolean{
-    return answers.some(x=> x==answerId);
+  answerChecked(answers: number[], answerId: number): boolean {
+    return answers.some(x => x == answerId);
   }
-
-
 
 }

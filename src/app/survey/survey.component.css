@@ -1,3 +1,18 @@
 label {
     display: block;
 }
+
+.nav-buttons{
+    display: block;
+    margin-top: 30px;
+    clear: both;
+}
+
+.questions-container{
+    height:320px;
+    float: left;
+}
+
+.question{
+    padding-bottom:20px;
+}

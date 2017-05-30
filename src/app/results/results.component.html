@@ -1,14 +1,14 @@
 <!--<p *ngFor="let obj of AllProductCounts">
   <span *ngFor="let elem of generateArray(obj)">{{elem}} </span>
 </p>-->
-<div class="app-results">
-<h1 *ngIf="selectedProdSorted!=null">Results</h1>
+<div class="app-results" *ngIf="selectedProdSorted.length > 0">
+  <h3 class="header">Results</h3>
 
-<div *ngFor="let p of selectedProdSorted">
-  <h2>{{p.ModelSku}} - {{p.Id}} - {{p.Count}}</h2>
-  <label *ngFor="let a of allAnswers">
+  <div class="model-results" *ngFor="let p of selectedProdSorted">
+    <h4 class="header">{{p.ModelSku}}</h4>
+    <label *ngFor="let a of allAnswers">
     <input type="checkbox" disabled [checked]="answerChecked(p.Answers,a.Id)" />
     {{a.PropertyDescription}}
   </label>
-</div>
+  </div>
 </div>

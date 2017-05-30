@@ -7,7 +7,7 @@ import {Answer } from '../answer';
 export class AnswersForQuestionPipe implements PipeTransform {
 
   transform(answers: Answer[], questionId: number): any {
-    return answers.filter(i => i.QuestionId===questionId);
+    return answers.filter(a => a.QuestionId===questionId);
   }
 
 }
