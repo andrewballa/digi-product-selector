@@ -20,7 +20,6 @@ export class SurveyComponent implements OnInit, DoCheck {
   selectedProducts: SelectedProducts[] = [];
   currentQuestion: number = 0;
   numberOfViews: number = 0;
-  isResetResults: boolean;
   isQuestionsAvailable: boolean = false;
   isAnswersAvailable: boolean = false;
   isProductAttrsAvailable: boolean = false;
@@ -31,7 +30,6 @@ export class SurveyComponent implements OnInit, DoCheck {
     this.getQuestions();
     this.getProductAttributes();
     this.getAnswers();
-    this.isResetResults = false;
   }
 
   ngDoCheck(): void {
@@ -94,7 +92,6 @@ export class SurveyComponent implements OnInit, DoCheck {
   startOverSurvey(): void {
     this.currentQuestion = 0;
     this.selectedProducts = [];
-    this.isResetResults = true;
   }
 
 

@@ -7,7 +7,7 @@
   <div class="model-results" *ngFor="let p of selectedProdSorted">
     <h4 class="header">{{p.ModelSku}}</h4>
     <label *ngFor="let a of allAnswers">
-    <input type="checkbox" disabled [checked]="answerChecked(p.Answers,a.Id)" />
+    <input type="checkbox" disabled [checked]="answerChecked(p.Id,a.Id)" />
     {{a.PropertyDescription}}
   </label>
   </div>
