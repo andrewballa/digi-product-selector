@@ -12,25 +12,23 @@ import * as _ from "lodash";
 })
 export class ResultsComponent implements OnInit, DoCheck {
 
-  allProducts: Product[];
   selectedProdSorted: Product[] = [];
 
   @Input() selectedProducts: SelectedProducts[] = [];
   @Input() allAnswers: Answer[] = [];
+  @Input() allProducts: Product[] = [];
 
 
   constructor(private selectorApi: SelectorApiService) { }
 
   ngOnInit() {
-    this.getProducts();
   }
 
   ngDoCheck() {
     if (this.selectedProducts != null) {
       this.processSelectedProducts();
     }
-    else
-    {
+    else {
       this.selectedProdSorted = [];
     }
   }
@@ -60,7 +58,7 @@ export class ResultsComponent implements OnInit, DoCheck {
       var thisProd = that.allProducts.find(p => p.Id.toString() == key);
       var prod = new Product();
       prod.Id = +key; //+ is TypeScript syntax to convert a string to an integer
-      prod.ModelSku = thisProd.ModelSku;
+      prod["ModelSku"] = thisProd["ModelSku"];
       that.selectedProducts.forEach(function (sp) {
         sp.Products.forEach(function (pId) {
           if (pId == prod.Id) {

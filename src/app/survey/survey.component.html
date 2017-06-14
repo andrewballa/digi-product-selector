@@ -13,11 +13,11 @@
   </div>
 
   <div class="nav-buttons">
-    <button [disabled]="this.currentQuestion <= 0" (click)="showPrev()" onclick="return false;"><Prev</button>
-    <button [disabled]="this.currentQuestion > this.numberOfViews + 2" (click)="showNext()" onclick="return false;">Next></button>
+    <button [disabled]="this.currentQuestion <= 0" (click)="showPrev()" onclick="return false;"> <Prev </button>
+    <button [disabled]="this.currentQuestion > this.numberOfViews + 2" (click)="showNext()" onclick="return false;"> Next> </button>
     <button (click)="startOverSurvey()" onclick="return false;">Start Over</button>
   </div>
 </div>
 
-
-<app-results class="app-results" [selectedProducts]="getSelectedProducts()" [allAnswers]="this.answers"></app-results>
+<!--Pass selectedProducts, allProducts and allAnswers arrays to the child component, so we don't have to fetch them later-->
+<app-results class="app-results" [selectedProducts]="getSelectedProducts()" [allProducts]="this.products" [allAnswers]="this.answers"></app-results>

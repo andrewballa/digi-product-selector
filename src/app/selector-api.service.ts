@@ -15,19 +15,20 @@ import { ProductAttribute } from './product-attribute';
 export class SelectorApiService {
 
   // // // Dev
-  private questionsUrl = 'http://172.16.1.135/customapi/SelectorToolApi/getdata/getquestions';
-  private answersUrl = 'http://172.16.1.135/customapi/SelectorToolApi/getdata/getanswers';
-  private productsUrl = 'http://172.16.1.135/customapi/SelectorToolApi/getdata/getproducts';
-  private prodAttrUrl = 'http://172.16.1.135/customapi/SelectorToolApi/getdata/getproductattributes';
+  private questionsUrl = 'http://172.16.1.135/selectortoolapi/selectortool/getdata/getquestions';
+  private answersUrl = 'http://172.16.1.135/selectortoolapi/selectortool/getdata/getanswers';
+  private productsUrl = 'http://172.16.1.135/selectortoolapi/selectortool/getdata/getproducts';
+  private prodAttrUrl = 'http://172.16.1.135/selectortoolapi/selectortool/getdata/getproductattributes'; 
 
   // // // Prod
-  // private questionsUrl = 'customapi/SelectorToolApi/getdata/getquestions';
-  // private answersUrl = 'customapi/SelectorToolApi/getdata/getanswers';
-  // private productsUrl = 'customapi/SelectorToolApi/getdata/getproducts';
-  // private prodAttrUrl = 'customapi/SelectorToolApi/getdata/getproductattributes';
+  // private questionsUrl = 'selectortoolapi/selectortool/getdata/getquestions';
+  // private answersUrl = 'selectortoolapi/selectortool/getdata/getanswers';
+  // private productsUrl = 'selectortoolapi/selectortool/getdata/getproducts';
+  // private prodAttrUrl = 'selectortoolapi/selectortool/getdata/getproductattributes';
 
   constructor(private http: Http) { }
 
+  //HTTP GET METHODS
   getQuestions(): Promise<Question[]> {
     return this.http.get(this.questionsUrl)
       .toPromise()
