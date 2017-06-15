@@ -32,28 +32,28 @@ export class SelectorApiService {
   getQuestions(): Promise<Question[]> {
     return this.http.get(this.questionsUrl)
       .toPromise()
-      .then(response => response.json().data as Question[])
+      .then(response => response.json() as Question[])
       .catch(this.handleError);
   }
 
   getAnswers(): Promise<Answer[]> {
     return this.http.get(this.answersUrl)
       .toPromise()
-      .then(response => response.json().data as Answer[])
+      .then(response => response.json() as Answer[])
       .catch(this.handleError);
   }
 
   getProducts(): Promise<Product[]>{
     return this.http.get(this.productsUrl)
       .toPromise()
-      .then(response => response.json().data as Product[])
+      .then(response => response.json() as Product[])
       .catch(this.handleError);
   }
 
   getProductAttributes(): Promise<ProductAttribute[]>{
     return this.http.get(this.prodAttrUrl)
       .toPromise()
-      .then(response => response.json().data as ProductAttribute[])
+      .then(response => response.json() as ProductAttribute[])
       .catch(this.handleError);
   }
 
